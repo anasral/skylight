@@ -373,8 +373,7 @@ export const DEFAULT_CONFIG: Config = {
   labelDensity: "all",
   nearestN: 5,
   showFields: {
-    airline: true,
-    flight: true,
+    name: true,
     type: true,
     altitude: true,
     speed: true,
@@ -382,6 +381,7 @@ export const DEFAULT_CONFIG: Config = {
     destination: true,
     registration: false,
   },
+  nameDisplay: "flight",
   locationDisplay: "name",
   speedUnit: "kt",
 
