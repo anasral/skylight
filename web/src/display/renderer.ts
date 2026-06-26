@@ -435,8 +435,11 @@ export class Renderer {
       }
     }
     const mid = this.sampleAt(tr, tt, cfg);
-    if (mid && tr.ac.track != null) {
-      const ahead = deadReckon(mid.m, tr.ac.track, 120, 1);
+    // Stationary or no current track? Keep the last known heading from history
+    // instead of snapping to 0° (north) — matters for parked/taxiing aircraft.
+    const track = this.fallbackAz(tr);
+    if (mid && track != null) {
+      const ahead = deadReckon(mid.m, track, 120, 1);
       const p0 = this.toPoint(mid, cfg, proj, tr);
       const p1 = this.toPoint({ m: ahead, altFt: mid.altFt }, cfg, proj, tr);
       return Math.atan2(p1.y - p0.y, p1.x - p0.x);
