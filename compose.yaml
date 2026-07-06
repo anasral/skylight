@@ -21,12 +21,12 @@ services:
       # AIRCRAFT_JSON_URL: http://192.168.1.50:8080/data/aircraft.json
       # Add your own hostname/tunnel if you expose this beyond the LAN:
       ALLOWED_HOSTS: skylight.anasral.duckdns.org
-     # LAT: 45.4984 #added by me
-    #  LON: -73.7078 #added by me
-    #command: pnpm dev #added by me 
+      LAT: 45.4984 #added by me
+      LON: -73.7078 #added by me
+    command: pnpm dev #added by me 
     volumes:
       # Persist config.json + route/TLE caches across restarts.
-      - skylight-data2:/app/server/data
+      - skylight-data:/app/server/data
     # To reach a decoder running in ANOTHER compose project (e.g. ultrafeeder),
     # join its network so the container name resolves — then use
     # AIRCRAFT_JSON_URL: http://ultrafeeder:8080/data/aircraft.json
