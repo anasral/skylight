@@ -21,8 +21,8 @@ services:
       # AIRCRAFT_JSON_URL: http://192.168.1.50:8080/data/aircraft.json
       # Add your own hostname/tunnel if you expose this beyond the LAN:
       ALLOWED_HOSTS: skylight.anasral.duckdns.org
-      LAT: 45.4984 #added by me
-      LON: -73.7078 #added by me
+     # LAT: 45.4984 #added by me
+    #  LON: -73.7078 #added by me
     command: pnpm dev #added by me 
     volumes:
       # Persist config.json + route/TLE caches across restarts.
