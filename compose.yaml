@@ -24,7 +24,7 @@ services:
       ALLOWED_HOSTS: skylight.anasral.duckdns.org
       LAT: 45.4984 #added by me
       LON: -73.7078 #added by me
-    #command: pnpm dev #added by me 
+    command: pnpm dev #added by me 
     volumes:
       # Persist config.json + route/TLE caches across restarts.
       - skylight-data:/app/server/data
