@@ -11,7 +11,8 @@
 services:
   skylight:
     build: .
-    image: skylight
+    #image: skylight
+    image: local/skylight:latest
     restart: unless-stopped
     ports:
       - "2000:3000"
