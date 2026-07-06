@@ -22,6 +22,8 @@ services:
       # AIRCRAFT_JSON_URL: http://192.168.1.50:8080/data/aircraft.json
       # Add your own hostname/tunnel if you expose this beyond the LAN:
       ALLOWED_HOSTS: skylight.anasral.duckdns.org 
+      LAT: 45.5017
+      LON: -73.5673
     volumes:
       # Persist config.json + route/TLE caches across restarts.
       - skylight-data:/app/server/data
