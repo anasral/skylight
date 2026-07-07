@@ -8,25 +8,25 @@
 # at an existing dump1090/readsb feed on your network (you can also change the URL
 # live from the control panel's Source section).
 
-services:
-  skylight:
-    build: .
-    image: skylight
+#services:
+#  skylight:
+#    build: .
+#    image: skylight
     #image: local/skylight:latest
-    restart: unless-stopped
-    ports:
-      - "2000:3000"
-    environment:
-      DATA_SOURCE: api
+#    restart: unless-stopped
+#    ports:
+#      - "2000:3000"
+#    environment:
+#      DATA_SOURCE: api
       # DATA_SOURCE: radio
       # AIRCRAFT_JSON_URL: http://192.168.1.50:8080/data/aircraft.json
       # Add your own hostname/tunnel if you expose this beyond the LAN:
-      ALLOWED_HOSTS: skylight.anasral.duckdns.org 
-      LAT: 45.5017
-      LON: -73.5673
-    volumes:
+#      ALLOWED_HOSTS: skylight.anasral.duckdns.org 
+#      LAT: 45.5017
+#      LON: -73.5673
+#    volumes:
       # Persist config.json + route/TLE caches across restarts.
-      - skylight-data:/app/server/data
+#      - skylight-data:/app/server/data
     # To reach a decoder running in ANOTHER compose project (e.g. ultrafeeder),
     # join its network so the container name resolves — then use
     # AIRCRAFT_JSON_URL: http://ultrafeeder:8080/data/aircraft.json
@@ -36,6 +36,33 @@ services:
 #   adsb:
 #     external: true
 #     name: <the decoder project's network — see `docker network ls`>
+
+#volumes:
+#  skylight-data:
+
+#above was almost the origianl , below is the one deployed 
+
+services:
+  skylight:
+    image: skylight:latest        # match the tag from step 1
+    restart: unless-stopped
+    ports:
+      - "2000:3000"
+    environment:
+      DATA_SOURCE: api
+      ALLOWED_HOSTS: skylight.anasral.duckdns.org 
+      API_URL: "https://opendata.adsb.fi/api/v3/lat/{lat}/lon/{lon}/dist/{r}"
+      #API_URL: "https://api.adsb.one/v2/point/{lat}/{lon}/{r}" #i get 403 here
+      #API_URL: "https://api.adsb.lol/v2/point/{lat}/{lon}/{r}"
+      #API_URL: "https://api.airplanes.live/v2/point/{lat}/{lon}/{r}"
+      POLL_MS: "2000"
+      #API_POLL_MS: "6000"
+      LAT: "45.4984"
+      LON: "-73.7077"
+      # Only needed if you reach it via a hostname/tunnel. LAN IPs + *.local
+      # are allowed by default, so you can delete this line if using an IP.
+    volumes:
+      - skylight-data:/app/server/data
 
 volumes:
   skylight-data:
